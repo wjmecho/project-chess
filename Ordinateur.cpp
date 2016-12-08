@@ -7,9 +7,9 @@
 
 Ordinateur::Ordinateur()
 {
-    p1.setcolor(1);
-    p2.setcolor(1);
-    p3.setcolor(-1);
+    p1.setcolor(1);     //è¡¨ç¤ºé»‘è‰²å…µ
+    p2.setcolor(1);     //è¡¨ç¤ºé»‘è‰²ç‹
+    p3.setcolor(-1);    //è¡¨ç¤ºç©º
     //ctor
 }
 
@@ -21,9 +21,9 @@ Ordinateur::~Ordinateur()
 
 void Ordinateur::move(){
 //    int dir[4][2]={{1,1},{-1,1},{-1,-1},{1,-1}};
-    int tl=tableau.size();        //ÆåÅÌµÄĞĞÊı
-    int tc=tableau[1].size();      //ÆåÅÌµÄÁĞÊı
-    int n=0;                         //¼ÇÂ¼ºÚÉ«Æå×ÓµÄ¸öÊı
+    int tl=tableau.size();        //æ£‹ç›˜çš„è¡Œæ•°
+    int tc=tableau[1].size();      //æ£‹ç›˜çš„åˆ—æ•°
+    int n=0;                         //è®°å½•é»‘è‰²æ£‹å­çš„ä¸ªæ•°
     for(int i=0;i<tl;i++){          //find all the positions of noir pieces
         for(int j=0;j<tc;j++){
             if((tableau[i][j]).getcolor()==1){
@@ -32,12 +32,12 @@ void Ordinateur::move(){
                 a=i+65;
                 tmp.setligne(a);
                 tmp.setcolonne(j+1);
-                memtab.push_back(tmp);        //´æ·ÅµÄÊÇposition  ËùÓĞºÚÆå×ÓµÄÎ»ÖÃ
+                memtab.push_back(tmp);        //å­˜æ”¾çš„æ˜¯position  æ‰€æœ‰é»‘æ£‹å­çš„ä½ç½®
                 n++;
             }
         }
     }
-    Position position;             //ÎªÁËÊéĞ´·½±ã¡£¡£¡£
+    Position position;             //ä¸ºäº†ä¹¦å†™æ–¹ä¾¿ã€‚ã€‚ã€‚
     int maxmove=0;                // the longest steps
     int maxchemin[100][2]={0};    //le longest route
     int essaychemin[100][2]={0};      //temporary record of the route
@@ -63,7 +63,7 @@ void Ordinateur::move(){
     if(maxmove==1)                    //no piece to skip
     {
         int r;
-        bool res=0;        //ÅĞ¶ÏÊÇ·ñÖÕÖ¹Ñ­»·²»ÓÃÔÙËæ»úÈ·¶¨Ò»¸öÆå×ÓµÄ²ÎÊı
+        bool res=0;        //åˆ¤æ–­æ˜¯å¦ç»ˆæ­¢å¾ªç¯ä¸ç”¨å†éšæœºç¡®å®šä¸€ä¸ªæ£‹å­çš„å‚æ•°
         do                                    //randomly get a position of a piece and if it can walk then walk one step forward
         {
             srand(time(NULL));
@@ -71,15 +71,15 @@ void Ordinateur::move(){
             position=memtab[r];
             int l=position.getligne()-65;
             int c=position.getcolonne()-1;
-            if((retab(position)).getisDame()==0){    //retabÊÇÒ»¸ö¿ÉÒÔÓÉÒ»¸ö×ø±ê·µ»¹ÆåÅÌ¶ÔÓ¦µÄÆå×ÓµÄº¯Êı
-               if(l+1<tl)    //ÍùÇ°×ß²»³¬³öÆåÅÌ
+            if((retab(position)).getisDame()==0){    //retabæ˜¯ä¸€ä¸ªå¯ä»¥ç”±ä¸€ä¸ªåæ ‡è¿”è¿˜æ£‹ç›˜å¯¹åº”çš„æ£‹å­çš„å‡½æ•°
+               if(l+1<tl)    //å¾€å‰èµ°ä¸è¶…å‡ºæ£‹ç›˜
                {
-                    if(c+1<tc&&(tableau[l+1][c+1]).getcolor()==-1){   //²»³¬³öÆåÅÌÇÒÒªµ½´ïµÄµØ·½ÊÇ¿ÕµÄ
-                         settab(position,p3);     //Ò»¸ö°ÑÆåÅÌ¶ÔÓ¦×ø±êµÄµØ·½±ä³ÉÆå×Óp3µÄº¯Êı
+                    if(c+1<tc&&(tableau[l+1][c+1]).getcolor()==-1){   //ä¸è¶…å‡ºæ£‹ç›˜ä¸”è¦åˆ°è¾¾çš„åœ°æ–¹æ˜¯ç©ºçš„
+                         settab(position,p3);     //ä¸€ä¸ªæŠŠæ£‹ç›˜å¯¹åº”åæ ‡çš„åœ°æ–¹å˜æˆæ£‹å­p3çš„å‡½æ•°
                          position.setligne(l+1+65);
                          position.setcolonne(c+1+1);
-                         if(position.getligne()==tl+64){settab(position,p2);}      //µ½´ïµÄµØ·½ÊÇÆåÅÌµ×²¿ ±ä³ÉÍõ
-                         else{settab(position,p1);}     //·ñÔòµ½´ïµÄµØ·½ÊÇ±ø
+                         if(position.getligne()==tl+64){settab(position,p2);}      //åˆ°è¾¾çš„åœ°æ–¹æ˜¯æ£‹ç›˜åº•éƒ¨ å˜æˆç‹
+                         else{settab(position,p1);}     //å¦åˆ™åˆ°è¾¾çš„åœ°æ–¹æ˜¯å…µ
                          res=1;
 
 
@@ -95,7 +95,7 @@ void Ordinateur::move(){
                     }
                }
             }
-            else{//   ÍõµÄ×ß·¨¡£¡£¡£
+            else{//   ç‹çš„èµ°æ³•ã€‚ã€‚ã€‚
 
             }
         }while(res==0);
@@ -110,7 +110,7 @@ void Ordinateur::move(){
             char mlchar;
             mlchar=ml+65;
             int mc=maxchemin[i][0]+1;
-            cout<<'('<<mlchar<<','<<mc<<')'<<"->";  //maxchemin±£´æµÄĞĞÁĞ×ø±êÊÇ±Ètableau±£´æµÄÒª´óÒ»µÄ
+            cout<<'('<<mlchar<<','<<mc<<')'<<"->";  //maxcheminä¿å­˜çš„è¡Œåˆ—åæ ‡æ˜¯æ¯”tableauä¿å­˜çš„è¦å¤§ä¸€çš„
             int d1=(maxchemin[i+1][0]-ml)/2;
             int d2=(maxchemin[i+1][1]-mc)/2;
             tableau[ml][mc]=p3;
