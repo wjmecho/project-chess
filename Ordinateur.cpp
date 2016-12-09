@@ -109,7 +109,7 @@ void Ordinateur::move(){
             int ml=maxchemin[i][0];         //ml cl index the same with tableau
             char mlchar;
             mlchar=ml+65;
-            int mc=maxchemin[i][0]+1;
+            int mc=maxchemin[i][1]+1;
             cout<<'('<<mlchar<<','<<mc<<')'<<"->";  //maxchemin保存的行列坐标是比tableau保存的要大一的
             int d1=(maxchemin[i+1][0]-ml)/2;
             int d2=(maxchemin[i+1][1]-mc)/2;
